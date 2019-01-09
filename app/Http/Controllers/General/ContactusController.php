@@ -6,11 +6,7 @@ use Illuminate\Http\Request;
 
 class ContactusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $contactus = contactus::all();
@@ -27,22 +23,11 @@ class ContactusController extends Controller
         return response()->json($response,404);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -80,26 +65,31 @@ class ContactusController extends Controller
         return response()->json($response, 404);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $contactus = contactus::where('id', $id)->firstOrFail();
-        
+        if($contactus){
+            $response = [
+                'msg' => 'record found',
+                'record' => $contactus
+            ];
+            return response()->json($response, 201);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function destroy($id)
     {
-        //
+        $contactus = contactus::where('id', $id)->first();
+        if($contactus->delete()){
+            $response = [
+                'msg'=>'contact deleted sucessfully'
+            ];
+            return response()->json($response,201);
+        }
+        $response = [
+            'msg' => 'unable to delete record'
+        ];
+        return response()->json($response, 404);
     }
 }

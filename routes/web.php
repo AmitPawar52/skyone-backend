@@ -19,7 +19,10 @@ Route::group(['prefix' => 'api/Home'], function(){
         'only' => ['index', 'show', 'store', 'destroy']
     ]);
     Route::resource('contactus', 'ContactusController',[
-        'only' => ['store']
+        'only' => ['index', 'show', 'store', 'destroy']
+    ]);
+    Route::resource('clientspeaks', 'ClientSpeaksController',[
+        'only' => ['index', 'store', 'show', 'destroy', 'update']
     ]);
 });
 

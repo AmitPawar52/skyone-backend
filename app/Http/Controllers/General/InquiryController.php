@@ -91,7 +91,7 @@ class InquiryController extends Controller
      */
     public function show($id)
     {
-        $inquiry = Inquiry::where('id', $id)->first();
+        $inquiry = Inquiry::where('id', $id)->firstOrFail();
         if($inquiry){
             $response = [
                 'msg'=> 'record found',
