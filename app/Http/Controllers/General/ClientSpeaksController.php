@@ -15,7 +15,7 @@ class ClientSpeaksController extends Controller
                 'msg' => 'Client sayings',
                 'details' => $clientSpeaks
             ];
-            return response()->json($response, 201);
+            return response()->json($clientSpeaks, 201);
         }
         $response = [
             'msg'=>'error in showing data'

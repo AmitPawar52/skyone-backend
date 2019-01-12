@@ -24,5 +24,8 @@ Route::group(['prefix' => 'api/Home'], function(){
     Route::resource('clientspeaks', 'ClientSpeaksController',[
         'only' => ['index', 'store', 'show', 'destroy', 'update']
     ]);
+    Route::resource('faq', 'General\FaqController',[
+        'only' => ['index', 'store', 'destroy', 'update']
+    ]);
 });
 

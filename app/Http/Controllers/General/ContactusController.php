@@ -33,7 +33,7 @@ class ContactusController extends Controller
         $this->validate($request, [
             'name' => 'required | max:60',
             'email' => 'required | E-Mail',
-            'mobileNo' => 'required | Integer',
+            'mobileNo' => 'required',
             'company' => 'required',
             'message' => 'required'
         ]);
