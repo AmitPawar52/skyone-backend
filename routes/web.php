@@ -27,5 +27,11 @@ Route::group(['prefix' => 'api/Home'], function(){
     Route::resource('faq', 'General\FaqController',[
         'only' => ['index', 'store', 'destroy', 'update']
     ]);
+    Route::resource('homeslider', 'General\homeSliderController',[
+        'only' => ['index', 'store', 'show', 'destroy', 'update']
+    ]);
+    Route::resource('blogs', 'General\blogController',[
+        'only' => ['index', 'store', 'show', 'destroy', 'update']
+    ]);
 });
 

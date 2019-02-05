@@ -14,7 +14,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $faq = \App\faq::paginate(5);
+        $faq = \App\faq::paginate(10);
         if(count($faq) > 0 ){
             $response = [
                 'FAQs'=> $faq
