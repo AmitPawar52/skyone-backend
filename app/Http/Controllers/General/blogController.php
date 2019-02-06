@@ -63,10 +63,10 @@ class blogController extends Controller
         ];
         return response()->json($response, 404);
     }
-
-    public function show($id)
+ 
+    public function show($title)
     {
-        $blogs = blog::where('id', $id)->firstOrFail();
+        $blogs = blog::where('title', $title)->firstOrFail();
         if($blogs){
             $response = [
                 'msg'=>'Record found',

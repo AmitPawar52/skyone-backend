@@ -33,5 +33,8 @@ Route::group(['prefix' => 'api/Home'], function(){
     Route::resource('blogs', 'General\blogController',[
         'only' => ['index', 'store', 'show', 'destroy', 'update']
     ]);
+    Route::resource('loandetails', 'bank\loanDetailsController',[
+        'only' => ['index', 'store', 'show', 'destroy', 'update']
+    ]);
 });
 
