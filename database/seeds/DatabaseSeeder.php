@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         //$this->call(ContactusTableSeeder::class);
         //factory(App\Inquiry::class, 10)->create();
-        //factory(App\faq::class, 10)->create();
+        //factory(App\faq::class, 20)->create();
         //factory(App\clientspeaks::class, 10)->create();
         //factory(App\homeSlider::class, 10)->create();
         //factory(App\blog::class, 10)->create();
-        factory(loanDetail::class, 5)->create();
+        //factory(loanDetail::class, 5)->create();
     }
 }
