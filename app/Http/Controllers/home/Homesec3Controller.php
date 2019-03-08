@@ -1,27 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\General;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\blog;
-use Carbon\Carbon;
+use App\home\homesec3;
 
-class blogController extends Controller
+class Homesec3Controller extends Controller
 {
+   
     public function index()
     {
-        $blogs = blog::all();
-        if(count($blogs) > 0){
+        $sec3 = homesec3::all();
+        if(count($sec3) > 0){
+            foreach($sec3 as $temp){
+                $temp->percentage = number_format($temp->percentage, 2);
+            }
             $response = [
-                'msg'=> 'all blogs',
-                'blogs'=>$blogs
+                'msg'=> 'all Partners',
+                'blogs'=>$sec3
             ];
-            return response()->json($blogs, 201);
+            return response()->json($sec3, 201);
         }
         else {
             $response = [ 
-                'msg'=> 'blogs not found'
+                'msg'=> 'Data not found'
             ];
             return response()->json($response, 404);
         }
@@ -29,32 +32,32 @@ class blogController extends Controller
 
     public function create()
     {
-        
+        //
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
-            'date' => 'required',
-            'imagePath' => 'required'
+            'percentage'=> 'required',
+            'label' => 'required',
+            'img_url' => 'required',
         ]);
         $title = $request->input('title');
-        $body = $request->input('body');
-        $date = $request->input('date');
-        $imagePath = $request->input('imagePath');
+        $percentage = $request->input('percentage');
+        $label = $request->input('label');
+        $img_url = $request->input('img_url');
         
-        $blogs = new blog([
+        $sec3 = new homesec3([
             'title' => $title,
-            'body' => $body,
-            'date' => Carbon::parse($date)->format('d-M-Y'),
-            'imagePath' => $imagePath
+            'percentage'=> $percentage,
+            'label'=> $label,
+            'img_url' => $img_url,
         ]);
-        if($blogs->save()){
+        if($sec3->save()){
             $response = [
                 'msg'=>'data stored',
-                'data'=>$blogs
+                'data'=>$sec3
             ];
             return response()->json($response, 201);
         }
@@ -63,16 +66,17 @@ class blogController extends Controller
         ];
         return response()->json($response, 404);
     }
- 
-    public function show($title)
+
+    public function show($id)
     {
-        $blogs = blog::where('title', $title)->firstOrFail();
-        if($blogs){
+        $sec3 = homesec3::where('id', $id)->firstOrFail();
+        if($sec3){
+            $sec3->percentage = number_format($sec3->percentage, 2);
             $response = [
                 'msg'=>'Record found',
-                'record'=>$blogs
+                'record'=>$sec3
             ];
-            return response()->json($blogs, 201);
+            return response()->json($sec3, 201);
         }
         else{
             $response = [
@@ -90,20 +94,19 @@ class blogController extends Controller
     public function update(Request $request, $id)
     {
         $title = $request->input('title');
-        $body = $request->input('body');
-        $date = $request->input('date');
-        $imagePath = $request->input('imagePath');
-
-        $blogs = blog::where('id', $id)->firstOrFail();
-        $blogs->title = $title;
-        $blogs->body = $body;
-        $blogs->date = Carbon::parse($date)->format('d-M-Y');
-        $blogs->imagePath = $imagePath;
-
-        if($blogs->save()){
+        $percentage = $request->input('percentage');
+        $label = $request->input('label');
+        $img_url = $request->input('img_url');
+        
+        $sec3 = homesec3::where('id', $id)->firstOrFail();
+        $sec3->title = $title;
+        $sec3->percentage = $percentage;
+        $sec3->label = $label;
+        $sec3->img_url = $img_url;
+        if($sec3->save()){
             $response = [
                 'msg' => 'Record updated',
-                'Data' => $blogs
+                'Data' => $sec3
             ];
             return response()->json($response, 201);
         }
@@ -111,8 +114,8 @@ class blogController extends Controller
 
     public function destroy($id)
     {
-        $blogs = blog::where('id',$id)->firstOrFail();
-        if($blogs->delete()){
+        $sec3 = homesec3::where('id',$id)->firstOrFail();
+        if($sec3->delete()){
             $response = [
                 'msg'=>'record deleted successfully'
             ];

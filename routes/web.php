@@ -14,21 +14,15 @@ Route::get('/', function() {
 	return view('welcome');
 })->middleware('guest');
 
-Route::group(['prefix' => 'api/Home'], function(){
+Route::group(['prefix' => 'api/v1/Home'], function(){
     Route::resource('inquiry', 'InquiryController',[
         'only' => ['index', 'show', 'store', 'destroy']
     ]);
     Route::resource('contactus', 'ContactusController',[
         'only' => ['index', 'show', 'store', 'destroy']
     ]);
-    Route::resource('clientspeaks', 'ClientSpeaksController',[
-        'only' => ['index', 'store', 'show', 'destroy', 'update']
-    ]);
     Route::resource('faq', 'General\FaqController',[
         'only' => ['index', 'store', 'destroy', 'update']
-    ]);
-    Route::resource('homeslider', 'General\homeSliderController',[
-        'only' => ['index', 'store', 'show', 'destroy', 'update']
     ]);
     Route::resource('blogs', 'General\blogController',[
         'only' => ['index', 'store', 'show', 'destroy', 'update']
@@ -36,5 +30,23 @@ Route::group(['prefix' => 'api/Home'], function(){
     Route::resource('loandetails', 'bank\loanDetailsController',[
         'only' => ['index', 'store', 'show', 'destroy', 'update']
     ]);
+    
+    Route::group(['prefix' => 'homepage'], function(){
+        Route::resource('partners', 'home\PartnersController',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('loanprocess', 'home\LoanProcessController',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('homeslider', 'General\homeSliderController',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('clientspeaks', 'ClientSpeaksController',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('homesec3', 'home\Homesec3Controller',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+    });
 });
 

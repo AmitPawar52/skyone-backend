@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\General;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\blog;
-use Carbon\Carbon;
+use App\home\loanProcess;
 
-class blogController extends Controller
+class LoanProcessController extends Controller
 {
+    
     public function index()
     {
-        $blogs = blog::all();
-        if(count($blogs) > 0){
+        $loanProcess = loanProcess::all();
+        if(count($loanProcess) > 0){
             $response = [
-                'msg'=> 'all blogs',
-                'blogs'=>$blogs
+                'msg'=> 'all Partners',
+                'blogs'=>$loanProcess
             ];
-            return response()->json($blogs, 201);
+            return response()->json($loanProcess, 201);
         }
         else {
             $response = [ 
-                'msg'=> 'blogs not found'
+                'msg'=> 'Data not found'
             ];
             return response()->json($response, 404);
         }
@@ -36,25 +36,22 @@ class blogController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
-            'date' => 'required',
-            'imagePath' => 'required'
+            'description'=> 'required',
+            'img_url' => 'required',
         ]);
         $title = $request->input('title');
-        $body = $request->input('body');
-        $date = $request->input('date');
-        $imagePath = $request->input('imagePath');
+        $description = $request->input('description');
+        $img_url = $request->input('img_url');
         
-        $blogs = new blog([
+        $loanProcess = new loanProcess([
             'title' => $title,
-            'body' => $body,
-            'date' => Carbon::parse($date)->format('d-M-Y'),
-            'imagePath' => $imagePath
+            'description'=> $description,
+            'img_url' => $img_url,
         ]);
-        if($blogs->save()){
+        if($loanProcess->save()){
             $response = [
                 'msg'=>'data stored',
-                'data'=>$blogs
+                'data'=>$loanProcess
             ];
             return response()->json($response, 201);
         }
@@ -63,16 +60,16 @@ class blogController extends Controller
         ];
         return response()->json($response, 404);
     }
- 
-    public function show($title)
+
+    public function show($id)
     {
-        $blogs = blog::where('title', $title)->firstOrFail();
-        if($blogs){
+        $loanProcess = loanProcess::where('id', $id)->firstOrFail();
+        if($loanProcess){
             $response = [
                 'msg'=>'Record found',
-                'record'=>$blogs
+                'record'=>$loanProcess
             ];
-            return response()->json($blogs, 201);
+            return response()->json($loanProcess, 201);
         }
         else{
             $response = [
@@ -84,26 +81,23 @@ class blogController extends Controller
 
     public function edit($id)
     {
-        //
+        
     }
 
     public function update(Request $request, $id)
     {
         $title = $request->input('title');
-        $body = $request->input('body');
-        $date = $request->input('date');
-        $imagePath = $request->input('imagePath');
-
-        $blogs = blog::where('id', $id)->firstOrFail();
-        $blogs->title = $title;
-        $blogs->body = $body;
-        $blogs->date = Carbon::parse($date)->format('d-M-Y');
-        $blogs->imagePath = $imagePath;
-
-        if($blogs->save()){
+        $description = $request->input('description');
+        $img_url = $request->input('img_url');
+        
+        $loanProcess = loanProcess::where('id', $id)->firstOrFail();
+        $loanProcess->title = $title;
+        $loanProcess->description = $description;
+        $loanProcess->img_url = $img_url;
+        if($loanProcess->save()){
             $response = [
                 'msg' => 'Record updated',
-                'Data' => $blogs
+                'Data' => $loanProcess
             ];
             return response()->json($response, 201);
         }
@@ -111,8 +105,8 @@ class blogController extends Controller
 
     public function destroy($id)
     {
-        $blogs = blog::where('id',$id)->firstOrFail();
-        if($blogs->delete()){
+        $loanProcess = loanProcess::where('id',$id)->firstOrFail();
+        if($loanProcess->delete()){
             $response = [
                 'msg'=>'record deleted successfully'
             ];
