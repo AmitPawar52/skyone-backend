@@ -1,6 +1,6 @@
 <?php
 
-use App\homeSlider;
+use App\home\homeSlider;
 use Faker\Generator as Faker;
 use Carbon\Carbon;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\General;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\homeSlider;
+use App\home\homeSlider;
 class homeSliderController extends Controller
 {
     public function index()
@@ -41,7 +41,7 @@ class homeSliderController extends Controller
         $description = $request->input('description');
         $imagePath = $request->input('imagePath');
 
-        $homeSlider = new \App\homeSlider([
+        $homeSlider = new homeSlider([
             'title' => $title,
             'description' => $description,
             'imagePath' => $imagePath
@@ -61,7 +61,7 @@ class homeSliderController extends Controller
 
     public function show($id)
     {
-        $homeSlider = \App\homeSlider::where('id', $id)->firstOrFail();
+        $homeSlider = homeSlider::where('id', $id)->firstOrFail();
         if($homeSlider){
             $response = [
                 'msg'=>'Record found',
@@ -88,7 +88,7 @@ class homeSliderController extends Controller
         $description = $request->input('description');
         $imagePath = $request->input('imagePath');
 
-        $homeSlider = \App\homeSlider::where('id', $id)->firstOrFail();
+        $homeSlider = homeSlider::where('id', $id)->firstOrFail();
         $homeSlider->title = $title;
         $homeSlider->description = $description;
         $homeSlider->imagePath = $imagePath;
@@ -104,7 +104,7 @@ class homeSliderController extends Controller
 
     public function destroy($id)
     {
-        $homeSlider = \App\homeSlider::where('id',$id)->firstOrFail();
+        $homeSlider = homeSlider::where('id',$id)->firstOrFail();
         if($homeSlider->delete()){
             $response = [
                 'msg'=>'record deleted successfully'

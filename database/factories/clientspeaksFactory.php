@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 use Carbon\Carbon;
-$factory->define(App\clientspeaks::class, function (Faker $faker) {
+$factory->define(App\home\clientspeaks::class, function (Faker $faker) {
     return [
         'clientName' => $faker->name,
         'clientPosition' => $faker->jobTitle,

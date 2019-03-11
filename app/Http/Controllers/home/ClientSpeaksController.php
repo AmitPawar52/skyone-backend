@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\home;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\home\clientspeaks;
 
 class ClientSpeaksController extends Controller
 {
 
     public function index()
     {
-        $clientSpeaks = \App\clientspeaks::all();
+        $clientSpeaks = clientspeaks::all();
         if(count($clientSpeaks) > 0 ){
             $response = [
                 'msg' => 'Client sayings',
@@ -41,7 +42,7 @@ class ClientSpeaksController extends Controller
         $clientSays = $request->input('clientSays');
         $imgPath = $request->input('imgPath');
 
-        $clientSpeaks = new \App\clientspeaks([
+        $clientSpeaks = new clientspeaks([
             'clientName' => $clientName,
             'clientPosition' => $clientPosition,
             'clientSays' => $clientSays,
@@ -62,7 +63,7 @@ class ClientSpeaksController extends Controller
 
     public function show($id)
     {
-        $clientSpeaks = \App\clientspeaks::where('id', $id)->firstOrFail();
+        $clientSpeaks = clientspeaks::where('id', $id)->firstOrFail();
         if($clientSpeaks){
             $response = [
                 'msg'=>'Record found',
@@ -91,7 +92,7 @@ class ClientSpeaksController extends Controller
         $clientSays = $request->input('clientSays');
         $imgPath = $request->input('imgPath');
 
-        $clientSpeaks = \App\clientspeaks::where('id', $id)->firstOrFail();
+        $clientSpeaks = clientspeaks::where('id', $id)->firstOrFail();
         $clientSpeaks->clientName = $clientName;
         $clientSpeaks->clientPosition = $clientPosition;
         $clientSpeaks->clientSays = $clientSays;
@@ -109,7 +110,7 @@ class ClientSpeaksController extends Controller
 
     public function destroy($id)
     {
-        $clientSpeaks = \App\clientspeaks::where('id',$id)->firstOrFail();
+        $clientSpeaks = clientspeaks::where('id',$id)->firstOrFail();
         if($clientSpeaks->delete()){
             $response = [
                 'msg'=>'record deleted successfully'
