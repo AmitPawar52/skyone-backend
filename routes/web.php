@@ -35,6 +35,7 @@ Route::group(['prefix' => 'api/v1/Home'], function(){
         Route::resource('partners', 'home\PartnersController',[
             'only' => ['index', 'store', 'show', 'destroy', 'update']
         ]);
+        // loanprocess == homesec5
         Route::resource('loanprocess', 'home\LoanProcessController',[
             'only' => ['index', 'store', 'show', 'destroy', 'update']
         ]);
@@ -45,6 +46,12 @@ Route::group(['prefix' => 'api/v1/Home'], function(){
             'only' => ['index', 'store', 'show', 'destroy', 'update']
         ]);
         Route::resource('homesec3', 'home\Homesec3Controller',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('homesec4', 'home\Homesec4Controller',[
+            'only' => ['index', 'store', 'show', 'destroy', 'update']
+        ]);
+        Route::resource('homesec2', 'home\Homesec2Controller',[
             'only' => ['index', 'store', 'show', 'destroy', 'update']
         ]);
     });
