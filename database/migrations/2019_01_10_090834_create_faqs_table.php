@@ -15,9 +15,11 @@ class CreateFaqsTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('loanDetail_id')->unsigned();
             $table->string('question');
             $table->text('answer');
             $table->timestamps();
+            $table->foreign('loanDetail_id')->references('id')->on('loan_details')->onDelete('cascade');
         });
     }
 

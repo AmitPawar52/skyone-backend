@@ -13,6 +13,7 @@
 Route::get('/', function() {
 	return view('welcome');
 })->middleware('guest');
+Route::get('api/v1/Home/loanfaqs/{id}', 'bank\loanDetailsController@getFaqs');
 
 Route::group(['prefix' => 'api/v1/Home'], function(){
     Route::resource('inquiry', 'InquiryController',[

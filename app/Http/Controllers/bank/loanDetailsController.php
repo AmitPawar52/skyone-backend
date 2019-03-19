@@ -5,7 +5,7 @@ namespace App\Http\Controllers\bank;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\loanDetail;
-
+use App\faq;
 class loanDetailsController extends Controller
 {
     public function index()
@@ -28,6 +28,12 @@ class loanDetailsController extends Controller
             ];
             return response()->json($response, 404);
         }
+    }
+
+// my function to retrive faqs of given loan type
+    public function getFaqs($id){
+        $lDetails = loanDetail::find($id)->faqs;
+        return response()->json($lDetails);
     }
 
     public function create()

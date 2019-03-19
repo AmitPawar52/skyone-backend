@@ -14,4 +14,7 @@ class loanDetail extends Model
                             'ptcTitle', 
                             'ptcPoints'
                         ];
+    public function faqs(){
+    	return $this->hasMany(faq::class, 'loanDetail_id');
+    }
 }

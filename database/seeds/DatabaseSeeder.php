@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         //factory(App\clientspeaks::class, 10)->create();
         //factory(App\homeSlider::class, 10)->create();
         //factory(App\blog::class, 10)->create();
-        //factory(loanDetail::class, 5)->create();
+        factory(loanDetail::class, 5)->create();
     }
 }

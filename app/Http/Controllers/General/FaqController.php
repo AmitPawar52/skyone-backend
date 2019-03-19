@@ -4,6 +4,7 @@ namespace App\Http\Controllers\General;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\faq;
 
 class FaqController extends Controller
 {
@@ -37,22 +38,23 @@ class FaqController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getLtype($id){
+        $faqs = faq::find($id);
+        return response()->json($faqs->loanDetail, 201);
+    }
     public function store(Request $request)
     {
         $this->validate($request, [
-            'question'=> 'required | max:60',
-            'answer'=> 'required | max:100'
+            'loanDetail_id'=> 'required',
+            'question'=> 'required | max:160',
+            'answer'=> 'required | max:500'
         ]);
+        $loanDetail_id = $request->input('loanDetail_id');
         $question = $request->input('question');
         $answer = $request->input('answer');
 
         $faq = new \App\faq([
+            'loanDetail_id'=>$loanDetail_id,
             'question'=> $question,
             'answer'=> $answer
         ]);
